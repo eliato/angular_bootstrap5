@@ -20,12 +20,6 @@ export class HomeComponent implements OnInit,OnDestroy {
 
   constructor(private dataService: DataService,private chRef: ChangeDetectorRef) {
 
-    this.produc$ = this.dataService.sendGetRequest(); this.produc$.subscribe( (datos) => {
-      console.log(datos);
-      this.produc = datos;
-      this.chRef.detectChanges();
-      this.dtTrigger.next();
-    })
    }
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
@@ -42,6 +36,13 @@ export class HomeComponent implements OnInit,OnDestroy {
         url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json',
       },
     };
+
+    this.produc$ = this.dataService.sendGetRequest(); this.produc$.subscribe( (datos) => {
+      console.log(datos);
+      this.produc = datos;
+      this.chRef.detectChanges();
+      this.dtTrigger.next();
+    })
 
   }
 

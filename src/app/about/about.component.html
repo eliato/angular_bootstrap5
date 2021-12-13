@@ -1,3 +1,20 @@
-<p style="padding: 13px;">
-  An Angular 13 example application that demonstrates how to use HttpClient to consume REST APIs
-  </p>
+<div class="container mt-3">
+  <div class="row justify-content-md-center">
+
+    <div class="col-md-auto">
+        <form  [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm)" autocomplete="off" >
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" name="firstName" id="firstName"  formControlName="firstName">
+            <div *ngIf="profileForm.get('firstName').invalid && (profileForm.get('firstName').dirty || profileForm.get('firstName').touched)">
+              Please provide a name.
+            </div>
+          </div>
+
+          <button type="submit"  [disabled]="!profileForm.valid"  class="btn btn-primary">Submit</button>
+
+        </form>
+    </div>
+
+  </div>
+</div>
