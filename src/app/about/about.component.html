@@ -2,16 +2,16 @@
   <div class="row justify-content-md-center">
 
     <div class="col-md-auto">
-        <form  [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm)" autocomplete="off" >
+        <form  [formGroup]="profileForm" (ngSubmit)="onSubmit()" autocomplete="off" >
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" name="firstName" id="firstName"  formControlName="firstName">
-            <div *ngIf="profileForm.get('firstName').invalid && (profileForm.get('firstName').dirty || profileForm.get('firstName').touched)">
-              Please provide a name.
+            <input type="text" class="form-control"  formControlName="email"  [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"/>
+            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+              <div *ngIf="f['email'].errors['required']">Email is required</div>
+              <div *ngIf="f['email'].errors['email']">Email is invalid</div>
             </div>
           </div>
-
-          <button type="submit"  [disabled]="!profileForm.valid"  class="btn btn-primary">Submit</button>
+          <button type="submit"   class="btn btn-primary">Submit</button>
 
         </form>
     </div>

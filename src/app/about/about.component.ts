@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 
 @Component({
@@ -9,21 +9,29 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 })
 export class AboutComponent implements OnInit {
   profileForm: FormGroup;
-
+  submitted = false;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
-      firstName: ['', [
+      email: ['', [
         Validators.required,
         Validators.email]],
     });
   }
 
-  onSubmit(profileForm: FormGroup) {
-    console.log('Valid?', profileForm.valid);
-    console.warn(this.profileForm.value);
+  get f(): { [key: string]: AbstractControl } {
+    return this.profileForm.controls;
+  }
+  onSubmit(): void {
+    this.submitted = true;
+
+    if (this.profileForm.invalid) {
+      return;
+    }
+
+    console.log(JSON.stringify(this.profileForm.value, null, 2));
 }
 
 }
