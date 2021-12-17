@@ -18,18 +18,18 @@
     <thead >
       <tr>
         <th scope="col">id</th>
-        <th scope="col">Name</th>
-        <th scope="col">description</th>
-        <th scope="col">quantity</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Cargo</th>
+        <th scope="col">Unidad</th>
 
       </tr>
     </thead>
     <tbody>
-       <tr *ngFor="let products of produc ">
-        <th scope="row">{{products.id}}</th>
-        <td>{{products.name}}</td>
-        <td>{{products.description}}</td>
-        <td>{{products.quantity}}</td>
+       <tr *ngFor="let usuario of Usuarios ">
+        <th scope="row">{{usuario.idUsuario}}</th>
+        <td>{{usuario.nombreUsuario}}</td>
+        <td>{{usuario.cargo}}</td>
+        <td>{{usuario.idUnidad.idInstitucion.direccion}}</td>
 
       </tr>
     </tbody>

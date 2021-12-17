@@ -11,7 +11,7 @@
               <div *ngIf="f['email'].errors['email']">Email is invalid</div>
             </div>
           </div>
-          <button type="submit"   class="btn btn-primary">Submit</button>
+          <button type="submit"  [disabled]="!profileForm.valid"  class="btn btn-primary">Submit</button>
 
         </form>
     </div>

@@ -3,6 +3,7 @@ import { DataService} from '../data.service';
 import { Productos } from '../interfa/productos';
 import { DataTableDirective } from "angular-datatables";
 import {Observable,Subject } from 'rxjs';
+import { Seiddes } from '../interfa/seiddes';
 
 @Component({
   selector: 'app-home',
@@ -11,16 +12,21 @@ import {Observable,Subject } from 'rxjs';
 })
 export class HomeComponent implements OnInit,OnDestroy {
 
+  Usuarios:any = [];
+
   // Datatables Properties
   dtOptions: DataTables.Settings = {};
     dtTrigger: Subject<any> = new Subject();
     @ViewChild(DataTableDirective, { static: false })  dtElement: DataTableDirective;
   public produc:  Productos[] = [];
   produc$: Observable<Productos[]>;
+  public datos: Seiddes[];
+  datos$: Observable<Seiddes[]>;
+  unidad:any = [];
 
-  constructor(private dataService: DataService,private chRef: ChangeDetectorRef) {
+  constructor(private dataService: DataService,private chRef: ChangeDetectorRef) {  }
 
-   }
+
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
@@ -32,14 +38,17 @@ export class HomeComponent implements OnInit,OnDestroy {
       responsive: false,
       paging:true,
       info: true,
+      lengthChange: true,
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json',
       },
     };
 
-    this.produc$ = this.dataService.sendGetRequest(); this.produc$.subscribe( (datos) => {
-      console.log(datos);
-      this.produc = datos;
+    this.dataService.GetUsuarios().subscribe( (datos: any[]) => {
+      //console.log(dat);
+
+      this.Usuarios = datos;
+
       this.chRef.detectChanges();
       this.dtTrigger.next();
     })
